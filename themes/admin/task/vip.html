@@ -1,0 +1,127 @@
+{extend name="base" /}
+{block name="body"}
+<link type="text/css" rel="stylesheet" href="/public/static/admin/jedate/test/jeDate-test.css">
+<link type="text/css" rel="stylesheet" href="/public/static/admin/jedate/skin/jedate.css">
+<script type="text/javascript" src="/public/static/admin/jedate/src/jedate.js"></script>
+<style type="text/css">
+    .right-arrow {
+        position: absolute;
+        width: 64px;
+        margin-top: -0.2rem;
+        right: 20px;
+        height: 38px;
+        line-height: 38px;
+        padding: 0 18px;
+        background-color: #009688;
+        color: #fff;
+        white-space: nowrap;
+        text-align: center;
+        font-size: 14px;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+    }
+    .right-arrow:hover{
+        color: #000;
+    }
+</style>
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/Task/taskConfig')}">动物分配</a></li>
+            <a href="javascript:history.go(-1)" class="right-arrow">返回</a>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/Task/vipAdd')}" method="post">
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">vip客户</label>
+                        <div class="layui-input-block">
+<!--                            <input type="text" name="uid" value="" required lay-verify="required" placeholder="请输入vipid" class="layui-input">-->
+                            <select name="uid" id="">
+                                <option value="">--请选择vip客户--</option>
+                                {volist name="vip" id="v"}
+                                <option value="{$v.id}" {eq name="v.id" value="$Think.request.id"}selected{/eq}>{$v.username}</option>
+
+                                {/volist}
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">动物数量</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="num" value="1"  required lay-verify="required" placeholder="请输入动物数量" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">动物id</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="pig_id" value="{$taskInfo.id}" readonly required lay-verify="required" placeholder="请输入动物id" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="pig_name" value="{$taskInfo.name}" readonly required lay-verify="required" placeholder="请输入名称" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">价格</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="price" value="{$taskInfo.min_price}"  required lay-verify="required" placeholder="请输入价格" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">周期</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="cycle" value="{$taskInfo.cycle}"  required lay-verify="required" placeholder="请输入周期" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">智能合约（收益百分比）</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="contract_revenue" value="{$taskInfo.contract_revenue}" required lay-verify="required" placeholder="请输入产出智能合约" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">dog产出率</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="doge" value="{$taskInfo.doge}" required lay-verify="required" placeholder="请输入dog产出率" class="layui-input">
+                        </div>
+                    </div>
+
+<!--                    <input type="hidden" name="id" value="{$taskInfo.id}">-->
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script src="/public/static/admin/js/layui/lay/modules/laydate.js"></script>
+<script>
+    high_nav("{:url('index')}");
+ /*   jeDate("#start-time",{
+        isinitVal:true,
+        format:"hh:mm"
+    });
+    jeDate('#end-time',{
+        isinitVal:true,
+        format:"hh:mm"
+    })
+
+*/
+</script>
+{/block}
